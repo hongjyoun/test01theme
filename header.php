@@ -26,26 +26,39 @@
 	</head>
 	<body <?php body_class(); ?>>
 
-		<!-- wrapper -->
+    <!-- header -->
+    <header id="header" class="" role="banner">
+      <div class="header-wrapper">
+
+        <div class="header-main">
+          <div class="header-main-inner container">
+
+            <div class="head-logo">
+              <a class="head-logo-text" href="<?php echo esc_url( home_url() ); ?>">
+                <!-- svg logo - toddmotto.com/mastering-svg-use-for-a-retina-web-fallbacks-with-png-script -->
+                <!-- <img src="<?php //echo esc_url( get_template_directory_uri() ); ?>/img/logo.svg" alt="Logo" class="logo-img"> -->
+                마음수련 명상센터
+              </a>
+            </div><!-- /logo -->
+
+            <nav class="mmc-head-nav" role="navigation">
+              <?php MMC_nav('mmc-nav-lists'); ?>
+            </nav><!-- /nav -->
+
+            <a class="head-cta">
+              <div class="head-cta-btn">
+                <span class="cta-text">
+                  방문예약
+                </span>
+              </div>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- /header -->
+
+    <!-- wrapper -->
 		<div class="wrapper">
 
-			<!-- header -->
-			<header class="header clear" role="banner">
-
-					<!-- logo -->
-					<div class="logo">
-						<a href="<?php echo esc_url( home_url() ); ?>">
-							<!-- svg logo - toddmotto.com/mastering-svg-use-for-a-retina-web-fallbacks-with-png-script -->
-							<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/logo.svg" alt="Logo" class="logo-img">
-						</a>
-					</div>
-					<!-- /logo -->
-
-					<!-- nav -->
-					<nav class="nav" role="navigation">
-						<?php html5blank_nav(); ?>
-					</nav>
-					<!-- /nav -->
-
-			</header>
-			<!-- /header -->

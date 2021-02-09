@@ -63,28 +63,29 @@ if ( function_exists( 'add_theme_support' ) ) {
     Functions
 \*------------------------------------*/
 
-// HTML5 Blank navigation
-function html5blank_nav() {
-    wp_nav_menu(
-    array(
-        'theme_location'  => 'header-menu',
-        'menu'            => '',
-        'container'       => 'div',
-        'container_class' => 'menu-{menu slug}-container',
-        'container_id'    => '',
-        'menu_class'      => 'menu',
-        'menu_id'         => '',
-        'echo'            => true,
-        'fallback_cb'     => 'wp_page_menu',
-        'before'          => '',
-        'after'           => '',
-        'link_before'     => '',
-        'link_after'      => '',
-        'items_wrap'      => '<ul>%3$s</ul>',
-        'depth'           => 0,
-        'walker'          => '',
-        )
-    );
+// MMC navigation
+function MMC_nav($classes = '', $theme_location = 'header-menu')
+{
+	wp_nav_menu(
+	array(
+		'theme_location'  => $theme_location,
+		'menu'            => '',
+		'container'       => 'div',
+		'container_class' => 'menu-{menu slug}-container',
+		'container_id'    => '',
+		'menu_class'      => 'menu',
+		'menu_id'         => '',
+		'echo'            => true,
+		'fallback_cb'     => 'wp_page_menu',
+		'before'          => '',
+		'after'           => '',
+		'link_before'     => '',
+		'link_after'      => '',
+		'items_wrap'      => '<ul class="'.$classes.'">%3$s</ul>',
+		'depth'           => 0,
+		'walker'          => ''
+		)
+	);
 }
 
 // Load HTML5 Blank scripts (header.php)
@@ -135,16 +136,21 @@ function html5blank_conditional_scripts() {
 }
 
 // Load HTML5 Blank styles
-function html5blank_styles() {
+function MMC_styles() {
     if ( HTML5_DEBUG ) {
         // normalize-css
         wp_register_style( 'normalize', get_template_directory_uri() . '/css/lib/normalize.css', array(), '7.0.0' );
 
         // Custom CSS
         wp_register_style( 'html5blank', get_template_directory_uri() . '/style.css', array( 'normalize' ), '1.0' );
-
-        // Register CSS
         wp_enqueue_style( 'html5blank' );
+
+        wp_register_style('mmcnav', get_template_directory_uri() . '/css/nav.css', array(), '1.0', 'all');
+        wp_enqueue_style('mmcnav'); // Enqueue it!
+
+        wp_register_style('mmcfonts', get_template_directory_uri() . '/css/fonts.css', array(), '1.0', 'all');
+        wp_enqueue_style('mmcfonts'); // Enqueue it!
+
     } else {
         // Custom CSS
         wp_register_style( 'html5blankcssmin', get_template_directory_uri() . '/style.css', array(), '1.0' );
@@ -153,11 +159,14 @@ function html5blank_styles() {
     }
 }
 
-// Register HTML5 Blank Navigation
-function register_html5_menu() {
+// Register HTML5 Blank Navigation => MMC_nav
+function register_MMC_menu() {
     register_nav_menus( array( // Using array to specify more menus if needed
-        'header-menu'  => esc_html( 'Header Menu', 'html5blank' ), // Main Navigation
-        'extra-menu'   => esc_html( 'Extra Menu', 'html5blank' ) // Extra Navigation if needed (duplicate as many as you need!)
+      'header-menu' => __('Header Menu (메인 GNB)', 'html5blank'), // Main Navigation
+      'mobile-menu' => __('Mobile Menu (모바일 상단메뉴)', 'html5blank'), // Main Navigation
+      'sidebar-menu' => __('Sidebar Menu (사이드바)', 'html5blank'), // Sidebar Navigation
+      'contact-menu' => __('Contact Menu', 'html5blank'), // 문의 게시판 메뉴
+      'extra-menu' => __('Extra Menu', 'html5blank') 
     ) );
 }
 
@@ -365,8 +374,8 @@ function html5blankcomments( $comment, $args, $depth ) {
 add_action( 'wp_enqueue_scripts', 'html5blank_header_scripts' ); // Add Custom Scripts to wp_head
 add_action( 'wp_print_scripts', 'html5blank_conditional_scripts' ); // Add Conditional Page Scripts
 add_action( 'get_header', 'enable_threaded_comments' ); // Enable Threaded Comments
-add_action( 'wp_enqueue_scripts', 'html5blank_styles' ); // Add Theme Stylesheet
-add_action( 'init', 'register_html5_menu' ); // Add HTML5 Blank Menu
+add_action( 'wp_enqueue_scripts', 'MMC_styles' ); // Add Theme Stylesheet
+add_action( 'init', 'register_MMC_menu' ); // Add HTML5 Blank Menu
 add_action( 'init', 'create_post_type_html5' ); // Add our HTML5 Blank Custom Post Type
 add_action( 'widgets_init', 'my_remove_recent_comments_style' ); // Remove inline Recent Comment Styles from wp_head()
 add_action( 'init', 'html5wp_pagination' ); // Add our HTML5 Pagination

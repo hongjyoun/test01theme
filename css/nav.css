@@ -1,0 +1,36 @@
+/* ========================================
+			HEADER & FOOTER CSS
+	 ======================================== */
+
+
+
+/*------------------------------------*\
+    HEADER
+\*------------------------------------*/
+#header {position:fixed;top:0;width:100%;z-index:100}
+
+.header-main {height:92px;background-color:#111118;}
+.header-main-inner {height:100%; display: flex; justify-content: space-between; align-items: center;}
+.header-main-inner .head-logo {display: inline-block;}
+.header-main-inner .head-logo .head-logo-text{color: #fff; font-weight:400;}
+
+.header-main-inner .mmc-head-nav .mmc-nav-lists {display: flex;}
+.header-main-inner .mmc-head-nav .mmc-nav-lists ul {visibility:hidden;position:absolute;left:0;top:100%;z-index:203;opacity:0;}
+.header-main-inner .mmc-head-nav .mmc-nav-lists li {color: #fff; font-weight:400;}
+/* .header-main-inner .mmc-head-nav .mmc-nav-lists li .sub-menu {display:none;} */
+.header-main-inner .mmc-head-nav .mmc-nav-lists .sub-menu {display:block;}
+.header-main-inner .mmc-head-nav .mmc-nav-lists .sub-menu li {display:block;}
+
+.header-main-inner .head-cta .head-cta-btn {width: 95px;height: 36px;background-color: #6FB586;border-radius: 20px;font-size: 13px;display: flex;align-items: center;justify-content: center;letter-spacing: 1px;font-weight: 400;}
+.header-main-inner .head-cta .head-cta-btn .cta-text {color: #fff;}
+
+
+
+
+@media only screen and (min-width: 992px) {
+  .header-main-inner .head-logo .head-logo-text{font-size:16px;}
+  .header-main-inner .mmc-head-nav .mmc-nav-lists li {font-size:14px;width: 100px;text-align: center;}
+
+
+
+}
